@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MERRY CHRISTMAS</title>
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./css/tree.css">
- 
+
 
 </head>
+
 <body>
-   
+
     <ul>
         <li></li>
         <li></li>
         <li></li>
         <li></li>
         <li></li>
-      </ul>
-      <ul>
+    </ul>
+    <ul>
         <li></li>
         <li></li>
         <li></li>
@@ -275,10 +277,12 @@
         <li></li>
         <li></li>
         <li></li>
-      </ul>
+    </ul>
     <div id="Merry" class="christmas-message">Merry Christmas</div>
+    <div>
+        <img src="./img/treo-icon.gif" alt="">
+    </div>
     <img class="tree-icon">
-    <audio id="audio" src="./giangsinh.mp3"></audio>
     <div class="container">
         <button id="showButton">
             <img src="./img/letters.png" alt="Hình ảnh nút" />
@@ -286,36 +290,105 @@
     </div>
 
     <div id="guideInfo" class="hidden">
-        <button id="closeButton" class="close-btn">X</button>
+        <button id="closeButton" class="close-btn">Đóng ở đây</button>
+
         <div class="card">
             <div class="imgBox">
                 <div class="bark"></div>
-                <img src="./img/thiep.png">
+                <img src="./img/thiep.png" alt="Thiệp">
             </div>
-            <div class="details">
-                <h4 class="color margin"> MERRY CHRISTMAS </h4>
-                <p>Giáng Sinh này tớ chỉ mong</p>
-                <p>mọi điều tốt đẹp sẽ đến với cậu,</p>
-                <p>và tình bạn chúng ta sẽ luôn bền chặt</p>
-                <p>Chúc cậu một mùa lễ an lành</p>
-                <p>và một năm mới đầy niềm vui!</p>
-                <p class="text-right">Chúc mừng Giáng Sinh!</p>
-                <p class="text-right">♥Your friend♥</p>
-            </div>
+            <div class="details" id="cardDetails"></div>
         </div>
     </div>
 
     <div class="fixed-gif">
         <img src="./img/mewmew.gif" alt="GIF Image">
-      </div>
+    </div>
     <div id="snow-container"></div>
 
     <script src="./script.js"></script>
     <script>
-        document.body.addEventListener("click", function() {
-             var audio = document.getElementById("audio");
-             audio.play();
-         });
-     </script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const messages = [
+          
+                `
+        <h4 class="color margin">MERRY CHRISTMAS</h4>
+        <div class="content-letter">
+            <p>Giáng Sinh này anh mong</p>
+            <p>mọi điều tốt đẹp sẽ đến với Hà My,</p>
+            <p>Chúc em một mùa lễ an lành</p>
+            <p>và một năm mới đầy niềm vui!</p>
+            <p class="text-right">Chúc mừng Giáng Sinh!</p>
+            <p class="text-right">Đức Anh dz</p>
+        </div>
+        <img src="./img/tree-2.gif" alt="GIF Image">
+        <audio id="audio" src="./music-2.mp3"></audio>
+        `,
+                `
+        <h4 class="color margin">HAPPY NEW YEAR</h4>
+        <div class="content-letter">
+            <p>Một mùa lễ nữa lại đến,</p>
+            <p>chúc Hà My và gia đình tràn ngập</p>
+            <p>niềm vui, sức khỏe, và bình an.</p>
+            <p class="text-right">Chúc mừng năm mới!</p>
+            <p class="text-right">Anh Đức dz</p>
+        </div>
+        <img src="./img/cat-2.gif" alt="GIF Image">
+        <audio id="audio" src="./music-1.mp3"></audio>
+        `,
+                `
+            <h4 class="color margin">HAPPY NEW YEAR</h4>
+            <div class="content-letter">
+                <p>Người đẹp là để yêu thương.</p>
+                <p>Anh hy vọng mọi điều tốt đẹp ,</p>
+                <p>sẽ đến với em.</p>
+                <p class="text-right">Cùng đón năm mới với hy vọng!</p>
+                <p class="text-right">Anh Oppa</p>
+            </div>
+            <img src="./img/dog.gif" alt="GIF Image">
+            <audio id="audio" src="./music-3.mp3"></audio>
+            `,
+            `
+            <img src="./img/avatar-xinhdep.jpg" class="avatar-img" alt="GIF Image">
+            <img src="./img/cute.gif" class="avatar-img" alt="GIF Image">
+            <img src="./img/cute.gif" class="avatar-img" alt="GIF Image">
+            <img src="./img/avatar-thienthan.jpg" class="avatar-img" alt="GIF Image">
+            <p class="color margin">Gửi Tặng Hà My Xinh Đẹp</p>
+            <p class="color margin text-right author">Nguyễn Đức Anh</p>
+            <img src="./img/avatar-socute.jpg" class="avatar-img" alt="GIF Image">
+           <img src="./img/cute.gif" class="avatar-img" alt="GIF Image">
+            <audio id="audio" src="./music-5.mp3"></audio>
+            `,
+            `
+            <div class="content-end">
+            <h4 class="color margin">Hết gòi</h4>
+            </div>
+             <audio id="audio" src="./music-4.mp3"></audio>
+            `
+            ];
+
+            const guideInfo = document.getElementById("guideInfo");
+            const showButton = document.getElementById("showButton");
+            const cardDetails = document.getElementById("cardDetails");
+
+            let currentIndex = 0;
+
+            showButton.addEventListener("click", () => {
+                const selectedMessage = messages[currentIndex];
+
+                cardDetails.innerHTML = selectedMessage;
+
+                currentIndex = (currentIndex + 1) % messages.length;
+
+                guideInfo.classList.remove("hidden");
+            });
+        });
+        document.body.addEventListener("click", function () {
+            const audio = document.getElementById("audio");
+            if (audio) audio.play();
+        });
+
+    </script>
 </body>
+
 </html>
